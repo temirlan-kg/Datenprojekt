@@ -1,9 +1,9 @@
 # Vorhersage des Einkommens auf Basis von Bildungsmerkmalen (NEPScomp)
 
 Datenprojekt im Studiengang Social Data Science & Communication, TH Nürnberg Georg Simon Ohm
-**Student:** Temirlan Anarkulov
-**Betreuung:** Prof. Julia Plaß (TH Nürnberg), inhaltlich Michael Bergrab (LIfBi)
-**Zeitraum:** Oktober 2026 bis Januar 2027
+*Student:* Temirlan Anarkulov
+*Betreuung:* Prof. Julia Plaß (TH Nürnberg), inhaltlich Michael Bergrab (LIfBi)
+*Zeitraum:* Oktober 2026 bis Januar 2027
 
 > **Status:** In Arbeit (Phase 2: Einarbeitung & Datenaufbereitung)
 
