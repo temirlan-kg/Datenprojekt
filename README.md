@@ -7,7 +7,7 @@ Datenprojekt im Studiengang Social Data Science & Communication, TH Nürnberg Ge
 | **Student** | Temirlan Anarkulov |
 | **Betreuung** | Prof. Julia Plaß (TH Nürnberg), inhaltlich Michael Bergrab (LIfBi) |
 | **Zeitraum** | Oktober 2026 bis Januar 2027 |
-| **Status** | Analyse abgeschlossen, Bericht in Arbeit |
+
 
 ## Fragestellung
 
@@ -37,14 +37,14 @@ Lässt sich das spätere Einkommen einer Person aus ihren Bildungsmerkmalen vorh
 education-income-prediction/
 ├── README.md
 ├── .gitignore
-├── 01_data_preparation.py      # Datensatz bauen: 1 Zeile pro Person
-├── 02_descriptive_analysis.py  # Stichprobe, Verteilung, Eta², Spearman, Gruppenmittel
-├── 03_models.py                # 5 Modelle, Train/Test-Split, Kreuzvalidierung
-├── 04_evaluation.py            # Modellvergleich, Lasso-Effekte, Variable Importance
-├── figures/                    # Abbildungen (aggregiert)
-├── tables/                     # Ergebnistabellen (aggregiert)
-├── data/                       # NEPS-Rohdaten (lokal, nicht im Repo)
-└── output/                     # Zwischenergebnisse mit Personendaten (lokal, nicht im Repo)
+├── 01_data_preparation.py      
+├── 02_descriptive_analysis.py  
+├── 03_models.py                
+├── 04_evaluation.py            
+├── figures/                    
+├── tables/                     
+├── data/                       
+└── output/                     
 ```
 
 ## Ausführung
