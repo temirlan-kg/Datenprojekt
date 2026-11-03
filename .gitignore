@@ -1,0 +1,12 @@
+
+data/
+output/
+*.dta
+*.sav
+*.pkl
+*.joblib
+
+# PyCharm / Python / Mac
+.idea/
+__pycache__/
+.DS_Store
