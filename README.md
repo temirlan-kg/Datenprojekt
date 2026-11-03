@@ -1,16 +1,17 @@
 # Vorhersage des Einkommens auf Basis von Bildungsmerkmalen (NEPScomp)
 
 Datenprojekt im Studiengang Social Data Science & Communication, TH Nürnberg Georg Simon Ohm
-*Student:* Temirlan Anarkulov
-*Betreuung:* Prof. Julia Plaß (TH Nürnberg), inhaltlich Michael Bergrab (LIfBi)
-*Zeitraum:* Oktober 2026 bis Januar 2027
----
+
+| | |
+|---|---|
+| **Student** | Temirlan Anarkulov |
+| **Betreuung** | Prof. Julia Plaß (TH Nürnberg), inhaltlich Michael Bergrab (LIfBi) |
+| **Zeitraum** | Oktober 2026 bis Januar 2027 |
+| **Status** | Analyse abgeschlossen, Bericht in Arbeit |
 
 ## Fragestellung
 
 Lässt sich das spätere Einkommen einer Person aus ihren Bildungsmerkmalen vorhersagen?
-
-Ziele des Projekts:
 
 1. Die Daten **deskriptiv analysieren** (Maßzahlen und Visualisierungen)
 2. **Prädiktive Modelle** für das Einkommen entwickeln und verschiedene Methoden ausprobieren
@@ -18,56 +19,74 @@ Ziele des Projekts:
 
 ## Datengrundlage
 
-- **Nationales Bildungspanel (NEPS)**, Aufbereitung **NEPScomp** für die universitäre Lehre
-- Startkohorte 6 (Erwachsene), aktuell genutzt: `SC6_spEmp_D_17-0-0.dta` (Erwerbsepisoden, 218.623 Zeilen × 146 Spalten)
+- **Nationales Bildungspanel (NEPS)**, Aufbereitung **NEPScomp**, Startkohorte 6 (Erwachsene), Version 17.0.0
 - Herausgeber: Leibniz-Institut für Bildungsverläufe (LIfBi), Bamberg, https://www.neps-data.de
 
-**Hinweis zum Datenschutz:** Die NEPS-Daten unterliegen einem Datennutzungsvertrag und sind **nicht** in diesem Repository enthalten. Der Ordner `data/` sowie alle `.dta`- und `.sav`-Dateien sind über `.gitignore` ausgeschlossen. Wer den Code ausführen will, braucht einen eigenen Datenzugang über das LIfBi.
+| Datei | Verwendete Informationen |
+|---|---|
+| `SC6_Basics` | Geschlecht, Geburtsjahr, Bildung der Eltern |
+| `SC6_Education` | Höchster Abschluss (ISCED-2011) |
+| `SC6_spEmp` | Nettoeinkommen, Wochenarbeitszeit, Mini-Job |
+| `SC6_spSchool` | Abschlussnote |
+
+**Datenschutz:** Die NEPS-Daten unterliegen einem Datennutzungsvertrag und sind **nicht** in diesem Repository enthalten. `data/` und `output/` (Personendaten) sind per `.gitignore` ausgeschlossen. In `figures/` und `tables/` liegen ausschließlich aggregierte Ergebnisse.
 
 ## Projektstruktur
 
 ```
-Datenprojekt/
+education-income-prediction/
 ├── README.md
 ├── .gitignore
-├── data/        # NEPS-Rohdaten (lokal, nicht im Repo)
-└── output/      # Zwischenergebnisse (lokal, nicht im Repo)
+├── 01_data_preparation.py      # Datensatz bauen: 1 Zeile pro Person
+├── 02_descriptive_analysis.py  # Stichprobe, Verteilung, Eta², Spearman, Gruppenmittel
+├── 03_models.py                # 5 Modelle, Train/Test-Split, Kreuzvalidierung
+├── 04_evaluation.py            # Modellvergleich, Lasso-Effekte, Variable Importance
+├── figures/                    # Abbildungen (aggregiert)
+├── tables/                     # Ergebnistabellen (aggregiert)
+├── data/                       # NEPS-Rohdaten (lokal, nicht im Repo)
+└── output/                     # Zwischenergebnisse mit Personendaten (lokal, nicht im Repo)
 ```
-
-## Methoden (geplant)
-
-| Phase | Methoden |
-|---|---|
-| Deskriptiv | Median, Quartile, Histogramm, Boxplots, Eta-Quadrat, Spearman-Korrelation, Gruppenmittelwerte |
-| Modellierung | Lineare Regression, Lasso, Random Forest, Gradient Boosting |
-| Evaluation | Train/Test-Split nach Personen-ID, Kreuzvalidierung, RMSE, R², Variable Importance |
 
 ## Ausführung
 
-Voraussetzungen: Python 3 (Anaconda), `pandas`, `pyreadstat`
+Voraussetzungen: Python 3.12, Pakete:
 
 ```bash
-pip install pandas pyreadstat
+pip install pandas numpy pyreadstat matplotlib seaborn scipy scikit-learn joblib
 ```
 
-Daten einlesen (Datei liegt lokal unter `data/`):
+NEPS-Dateien (`.dta`) in den Ordner `data/` legen, dann die Skripte der Reihe nach ausführen:
 
-```python
-import pyreadstat
-
-emp, meta_emp = pyreadstat.read_dta("data/SC6_spEmp_D_17-0-0.dta", apply_value_formats=True)
-
-# Spaltennamen mit Labels ergänzen, z. B. "ID_t | Target-ID"
-neue_namen = {code: f"{code} | {text}" for code, text in meta_emp.column_names_to_labels.items()}
-emp_lesbar = emp.rename(columns=neue_namen)
+```bash
+python 01_data_preparation.py
+python 02_descriptive_analysis.py
+python 03_models.py
+python 04_evaluation.py
 ```
+
+## Vorgehen
+
+| Schritt | Inhalt |
+|---|---|
+| Aufbereitung | NEPS-Missing-Codes (negative Werte) als fehlend behandelt; pro Person das letzte gültige Nettoeinkommen (ohne Mini-Jobs); höchster Abschluss in 7 Gruppen; Akademikerfamilie = mind. ein Elternteil mit FH-/Uni-Abschluss |
+| Stichprobe | Nettoeinkommen 300–15.000 €, nur Vollzeit (≥ 35 Std./Woche): **n = 8.667** |
+| Deskriptiv | Median/Quartile, Histogramm, Boxplots + Eta², Spearman-Korrelation, Gruppenmittelwerte |
+| Modelle | Baseline (Median), Lineare Regression, Lasso, Random Forest, Gradient Boosting; Zielvariable log(Einkommen), Gütemaße in Euro |
+| Evaluation | 80/20 Train/Test-Split, 5-fache Kreuzvalidierung, RMSE, MAE, R², Permutation Importance |
+
+## Zentrale Ergebnisse
+
+- Der höchste Abschluss erklärt allein ca. **18 %** der Einkommensunterschiede (η² = 0,18).
+- Alle Modelle erreichen ein Test-R² von ca. **0,30** (RMSE ca. 1.320 €) und schlagen die Baseline deutlich.
+- Komplexe Modelle (Random Forest, Gradient Boosting) sind kaum besser als die lineare Regression.
+- Wichtigster Prädiktor ist der **Abschluss**; Abschlussnote und Bildung der Eltern tragen bei gegebenem Abschluss kaum zusätzlich bei.
 
 ## Einsatz von KI
 
-Gemäß den Vorgaben wird gekennzeichnet, welche Teile mit KI erstellt wurden. Im Code werden KI-generierte Blöcke so markiert:
+Gemäß den Vorgaben ist gekennzeichnet, welche Teile mit KI erstellt wurden. KI-generierte Blöcke im Code sind so markiert:
 
 ```python
-# >>> KI-generiert (Claude), angepasst
+# >>> KI-generiert (Claude), von mir ausgeführt und nachvollzogen
 ...
 # <<< Ende KI
 ```
@@ -76,9 +95,12 @@ Gemäß den Vorgaben wird gekennzeichnet, welche Teile mit KI erstellt wurden. I
 |---|---|---|---|
 | `README.md` | gesamte Datei | KI-generiert, von mir geprüft und angepasst | Claude (Anthropic) |
 | `.gitignore` | gesamte Datei | selbst erstellt | – |
-
-*(Wird bei jeder neuen Datei ergänzt.)*
+| `01_data_preparation.py` | gesamte Datei | KI-generiert, von mir ausgeführt und nachvollzogen | Claude (Anthropic) |
+| `02_descriptive_analysis.py` | gesamte Datei | KI-generiert, von mir ausgeführt und nachvollzogen | Claude (Anthropic) |
+| `03_models.py` | gesamte Datei | KI-generiert, von mir ausgeführt und nachvollzogen | Claude (Anthropic) |
+| `04_evaluation.py` | gesamte Datei | KI-generiert, von mir ausgeführt und nachvollzogen | Claude (Anthropic) |
 
 ## Quellen
 
-- NEPS-Netzwerk (Hrsg.): Nationales Bildungspanel, Startkohorte 6 – Erwachsene. Leibniz-Institut für Bildungsverläufe (LIfBi), Bamberg. https://www.neps-data.de
+- Blossfeld, H.-P. & Roßbach, H.-G. (Hrsg.) (2019). *Education as a Lifelong Process: The German National Educational Panel Study (NEPS)*. 2. Aufl., Springer VS.
+- NEPS-Netzwerk: Nationales Bildungspanel, Startkohorte 6 – Erwachsene. LIfBi, Bamberg. https://www.neps-data.de
