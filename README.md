@@ -4,9 +4,6 @@ Datenprojekt im Studiengang Social Data Science & Communication, TH Nürnberg Ge
 *Student:* Temirlan Anarkulov
 *Betreuung:* Prof. Julia Plaß (TH Nürnberg), inhaltlich Michael Bergrab (LIfBi)
 *Zeitraum:* Oktober 2026 bis Januar 2027
-
-> **Status:** In Arbeit (Phase 2: Einarbeitung & Datenaufbereitung)
-
 ---
 
 ## Fragestellung
@@ -36,34 +33,6 @@ Datenprojekt/
 ├── data/        # NEPS-Rohdaten (lokal, nicht im Repo)
 └── output/      # Zwischenergebnisse (lokal, nicht im Repo)
 ```
-
-Geplant (wird im Laufe des Projekts ergänzt):
-
-```
-├── requirements.txt
-├── src/
-│   ├── 01_aufbereitung.py
-│   ├── 02_deskriptiv.py
-│   ├── 03_modelle.py
-│   └── 04_evaluation.py
-├── figures/     # Abbildungen für Bericht und Präsentation
-└── report/      # Bericht (PDF) und Präsentation
-```
-
-## Bisheriger Stand
-
-- [x] Datennutzungsvertrag unterschrieben, Datenzugang erhalten
-- [x] Projekt in PyCharm angelegt, `.gitignore` für Daten eingerichtet
-- [x] Erwerbsdatensatz (`spEmp`) mit `pyreadstat` eingelesen
-- [x] Spaltennamen um die Variablenlabels ergänzt (`emp_lesbar`), um die Variablen besser zu verstehen
-- [ ] Einkommensvariable auswählen (z. B. monatliches Nettoeinkommen)
-- [ ] Bildungsvariablen auswählen (Schulabschluss, Abschlussnote, Ausbildung/Studium, …)
-- [ ] NEPS-Missing-Codes (negative Werte) behandeln, Ausreißer prüfen
-- [ ] Datensatz auf eine Zeile pro Person bringen
-- [ ] Deskriptive Analyse
-- [ ] Prädiktive Modelle (lineare Regression, Lasso, Random Forest, Gradient Boosting)
-- [ ] Evaluation (RMSE, R², Kreuzvalidierung, Variable Importance)
-- [ ] Bericht und Präsentation
 
 ## Methoden (geplant)
 
