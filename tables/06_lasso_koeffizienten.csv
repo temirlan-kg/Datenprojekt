@@ -1,0 +1,14 @@
+Variable;Koeffizient;Effekt (%);auf 0 gesetzt
+Abschluss: 2 Abitur ohne Ausbildung;0.1929;21.3;False
+Abschluss: 3 Berufsausbildung;0.0952;10.0;False
+Abschluss: 4 Meister/Techniker/Fachschule;0.2751;31.7;False
+Abschluss: 5 Bachelor;0.4229;52.6;False
+Abschluss: 6 Master/Diplom/Staatsexamen;0.5604;75.1;False
+Abschluss: 7 Promotion;0.715;104.4;False
+abschlussnote;-0.0381;-3.7;False
+akademiker_eltern;-0.0014;-0.1;False
+weiblich;-0.2606;-22.9;False
+alter_einkommen;0.0048;0.5;False
+jahr_einkommen;0.0257;2.6;False
+fehlt: abschlussnote;-0.0054;-0.5;False
+fehlt: akademiker_eltern;-0.1206;-11.4;False

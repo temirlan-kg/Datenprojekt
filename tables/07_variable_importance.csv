@@ -1,0 +1,19 @@
+Modell;Variable;R²-Verlust
+Lineare Regression;abschluss;0.291
+Lineare Regression;abschlussnote;0.0027
+Lineare Regression;akademiker_eltern;0.0013
+Lineare Regression;weiblich;0.0838
+Lineare Regression;alter_einkommen;0.0192
+Lineare Regression;jahr_einkommen;0.1093
+Random Forest;abschluss;0.2717
+Random Forest;abschlussnote;0.0051
+Random Forest;akademiker_eltern;0.0015
+Random Forest;weiblich;0.1001
+Random Forest;alter_einkommen;0.0447
+Random Forest;jahr_einkommen;0.1415
+Gradient Boosting;abschluss;0.2748
+Gradient Boosting;abschlussnote;0.0053
+Gradient Boosting;akademiker_eltern;0.0021
+Gradient Boosting;weiblich;0.0845
+Gradient Boosting;alter_einkommen;0.0381
+Gradient Boosting;jahr_einkommen;0.1232
