@@ -33,19 +33,28 @@ Lässt sich das spätere Einkommen einer Person aus ihren Bildungsmerkmalen vorh
 
 ## Projektstruktur
 
+**Im Repository:**
+
 ```
 education-income-prediction/
-├── README.md
+├── figures/                    # Abbildungen (nur aggregierte Ergebnisse)
+├── tables/                     # Ergebnistabellen (nur aggregierte Ergebnisse)
 ├── .gitignore
-├── 01_data_preparation.py      
-├── 02_descriptive_analysis.py  
-├── 03_models.py                
-├── 04_evaluation.py            
-├── figures/                    
-├── tables/                     
-├── data/                       
-└── output/                     
+├── 01_data_preparation.py      # Datensatz bauen: 1 Zeile pro Person
+├── 02_descriptive_analysis.py  # Stichprobe, Verteilung, Eta², Spearman, Gruppenmittel
+├── 03_models.py                # 5 Modelle, Train/Test-Split, Kreuzvalidierung
+├── 04_evaluation.py            # Modellvergleich, Lasso-Effekte, Variable Importance
+└── README.md
 ```
+
+**Nur lokal (per `.gitignore` ausgeschlossen, Datenschutz):**
+
+```
+├── data/                       # NEPS-Rohdaten (.dta), Zugang nur über Datennutzungsvertrag
+└── output/                     # Zwischenergebnisse mit Personendaten (.pkl, .csv, .joblib)
+```
+
+Wer den Code ausführen will, legt die NEPS-Dateien in `data/` ab. `output/` wird von den Skripten automatisch erstellt.
 
 ## Ausführung
 
