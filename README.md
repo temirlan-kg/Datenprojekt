@@ -37,13 +37,13 @@ Lässt sich das spätere Einkommen einer Person aus ihren Bildungsmerkmalen vorh
 
 ```
 education-income-prediction/
-├── figures/                    # Abbildungen (nur aggregierte Ergebnisse)
-├── tables/                     # Ergebnistabellen (nur aggregierte Ergebnisse)
+├── figures/                    
+├── tables/                     
 ├── .gitignore
-├── 01_data_preparation.py      # Datensatz bauen: 1 Zeile pro Person
-├── 02_descriptive_analysis.py  # Stichprobe, Verteilung, Eta², Spearman, Gruppenmittel
-├── 03_models.py                # 5 Modelle, Train/Test-Split, Kreuzvalidierung
-├── 04_evaluation.py            # Modellvergleich, Lasso-Effekte, Variable Importance
+├── 01_data_preparation.py      
+├── 02_descriptive_analysis.py  
+├── 03_models.py                
+├── 04_evaluation.py          
 └── README.md
 ```
 
